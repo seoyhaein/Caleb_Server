@@ -55,7 +55,7 @@ public class HelloClient {
         // Access a service running on the local machine on port 50051
         HelloClient client = new HelloClient("localhost", 50051);
         try {
-            String user = "world";
+            String user = "world1111111";
             // Use the arg as the name to greet if provided
             if (args.length > 0) {
                 user = args[0];

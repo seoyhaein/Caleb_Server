@@ -16,7 +16,7 @@
  *
  */
 
-//go:generate protoc -I ../helloworld --go_out=plugins=grpc:../helloworld ../helloworld/hello.proto
+//go:generate protoc -I ../hello --go_out=plugins=grpc:../hello ../hello/hello.proto
 
 // Package main implements a server for Greeter service.
 package main
@@ -26,23 +26,25 @@ import (
 	"log"
 	"net"
 
+	pb "Caleb_Server/helloworld/hello"
 	"google.golang.org/grpc"
-	pb "google.golang.org/grpc/examples/helloworld/helloworld"
 )
 
 const (
 	port = ":50051"
 )
 
-// server is used to implement helloworld.GreeterServer.
+// server is used to implement hello.GreeterServer.
 type server struct {
+	//pb.UnimplementedGreeterServer
+
 	pb.UnimplementedGreeterServer
 }
 
-// SayHello implements helloworld.GreeterServer
+// SayHello implements hello.GreeterServer
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	log.Printf("Received: %v", in.GetName())
-	return &pb.HelloReply{Message: "Hello " + in.GetName()}, nil
+	return &pb.HelloReply{Message: "Hello111111 " + in.GetName()}, nil
 }
 
 func main() {
@@ -55,4 +57,5 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+	//fmt.Println("Server Start!")
 }
